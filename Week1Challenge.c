@@ -26,9 +26,9 @@
 \*---------------------------------------------------------------------------------------------------4246-*/
 
 
-void motors(int a, int b, int forTime) {
-	motor[motorA] = a;
-	motor[motorB] = b;
+void motors(int a_speed, int b_speed, int forTime) {
+	motor[motorA] = a_speed;
+	motor[motorB] = b_speed;
 	
 	wait1Msec(forTime);
 }
@@ -45,7 +45,7 @@ task main()
 		motors(100, 100, 0);
 	}
 
-	motors(25, 25, 500); // get the rest of the way there
+	motors(25, 25, 1000); // get the rest of the way there
 	
 	/* ================================================ *
 	 * Find the line to follow and then do so
@@ -63,7 +63,7 @@ task main()
 		motors(left, right, 10); // default is go
 		
 		if(SensorValue[L1] == 5) // otherwise if the left sees red, adjust left
-			left--; // this may not be enough (left -= 40 ?)
+			left--; // this may not be enough (left -= 40 ?) Happens every loop cycle ~ very quick. Not -40 but maybe 2-5 or so.
 		if(SensorValue[L2] == 5) // otherwise if the right sees red, adjust right
 			right--; // this may not be enough (right -= 40 ?)
 	
