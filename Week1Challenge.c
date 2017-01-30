@@ -80,29 +80,27 @@ task main()
 	
 	motors(15, -15, 700); // turn right (Alernatively try `motors(100, 40, 500)` or similar to turn while continuing forward)
 	
-	while(!SensorValue[P1]) { // run into the wall
+	while(SensorValue[U1 > 5]) { // stop infront of the wall
 		motors(50, 50, 0);
 	}
 	
 	while((SensorValue[L1] != 5) || (SensorValue[L2] != 5)) { // backup until red
-		motors(-50, -50, 0);
+		motors(-100, -100, 0);
 	}
 	
-	while((SensorValue[L1] != 1) || (SensorValue[L2] != 1)) { // backup until black line
-		motors(-50, -50, 0);
+	while((SensorValue[L1] != 1) || (SensorValue[L2] != 1)) { // continue backup until black line
+		motors(-100, -100, 0);
 	}
 	
 	motors(15, -15, 700); // turn right
 	
-	while(!SensorValue[P1]) { // run into the wall
+	while(SensorValue[U1 > 5]) { // run towards the wall
 		motors(50, 50, 0);
 	}
-	
-	motors(-20, -20, 1000); // backup so you can turn
-	
+		
 	motors(-15, 15, 700); // turn left
 	
-	while(!SensorValue[P1]) { // run into the wall
+	while(SensorValue[U1 > 5]) { // run into the wall
 		motors(50, 50, 0);
 	}
 	
